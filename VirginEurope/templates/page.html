@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Flight</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css">
+
+    <script
+			  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+			  integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+			  crossorigin="anonymous"></script>
+</head>
+<body>
+    <form action="/" method="post">
+        {% csrf_token %}
+        <div class="ui-widget">
+        {{ orig }}
+        </div>
+        <div class="ui-widget">
+        {{ dest }}
+        </div>
+        {{ form }}
+
+        <input type="submit" value="Submit">
+    </form>
+
+<script>
+  $(function () {
+    $("#flight_date").datepicker({
+      format:'dd/mm/yyyy',
+    });
+  });
+
+  $(function() {
+    $( "#origin_box" ).autocomplete({
+      source: "/airports/",
+      minLength: 2,
+    });
+    $( "#destination_box" ).autocomplete({
+      source: "/airports/",
+      minLength: 2,
+    });
+  } );
+</script>
+
+</body>
+</html>
