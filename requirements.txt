@@ -1,3 +1,5 @@
 wheel
 psycopg2-binary
 Django~=3.0.6
+requests
+

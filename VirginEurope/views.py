@@ -3,6 +3,7 @@ import json
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from VirginEurope import api
 from VirginEurope.forms import BookFlightForm, OriginBox, DestinationBox
 
 
@@ -26,14 +27,10 @@ def tickets(request):
 
 def airport_autocomplete(request):
 
-    results = ['Kobeřice International', 'Singapore Changi', 'Frankfurt um Mainz', 'Munchen Airport',
-                'Los Angeles International', 'Dubai International', 'Hamad International Airport',
-                'Leoš Janáček Aiport', 'Václav Havel Airport']
-
     if request.is_ajax():
-        results = json.dumps(list(filter(lambda x: request.GET.get('term', '') in x, results)))
+        results = api.search_airports(request.GET.get('term', ''))
     else:
-        results = json.dumps(results)
+        results = api.search_airports('')
 
     return HttpResponse(results, 'application/json')
 

@@ -20,11 +20,12 @@ class DestinationBox(forms.Form):
 class BookFlightForm(forms.Form):
 
     date = forms.DateField(
-        label="Date",
+        label='Date',
         widget=forms.DateInput(attrs={'id': 'flight_date', 'class': 'datepicker', 'data-toggle': 'datepicker'}),
         required=True
     )
     cls = forms.ChoiceField(
+        label='Class',
         required=True,
         widget=forms.Select,
         choices=TRAVEL_CLASS,
