@@ -16,6 +16,18 @@ def search_airports(query: str) -> str:
     return resp.text
 
 
+def _flight_to_url_params(first: int = None, second: int = None, cls: str = None) -> str:
+    params = []
+    if first:
+        params.append(f"fl1='{first}'")
+    if second:
+        params.append(f"fl2='{second}'")
+    if cls:
+        params.append(f"cls='{cls}'")
+
+    return str.join('&', params)
+
+
 class SingleSegment:
     def __init__(self, flight: str, flight_id: int, date: str, price: int, cls: str):
         self.flight = flight
@@ -30,6 +42,10 @@ class SingleSegment:
 
     def __str__(self):
         return f'Flight {self.flight} on {self.date}, travel class {self.cls}, price {self.price}'
+
+    @property
+    def to_url_params(self) -> str:
+        return _flight_to_url_params(first=self.id, cls=self.cls)
 
 
 class TwoSegment:
@@ -53,6 +69,10 @@ class TwoSegment:
                f'Second flight: {self.second_flight} on {self.second_date}, ' \
                f'travel class {self.cls}, price {self.price}'
 
+    @property
+    def to_url_params(self) -> str:
+        return _flight_to_url_params(first=self.first_id, second=self.second_id, cls=self.cls)
+
 
 def parse_flights(resp: str, cls: str) -> list:
     data = json.loads(resp)
@@ -65,7 +85,6 @@ def parse_flights(resp: str, cls: str) -> list:
 
 
 def search_flights(orig: str, dest: str, date: str, cls: str) -> list:
-
     data = {'orig': orig, 'dest': dest, 'date': date, 'cls': cls}
     resp = requests.post(f'{url}/find-flights', json=data)
 
@@ -73,3 +92,17 @@ def search_flights(orig: str, dest: str, date: str, cls: str) -> list:
         return []
 
     return parse_flights(resp.text, cls)
+
+
+def book_flights(fl1: int, fl2: int, pax: int, cls: str) -> str:
+    params = {'fl1': fl1, 'pax': pax, 'cls': cls}
+
+    if fl2 is not None:
+        params['fl2'] = fl2
+
+    resp = requests.get(f'{url}/book-flights', params=params)
+
+    if resp.status_code != 200:
+        return '{"error": "Server unavailable"}'
+
+    return resp.text

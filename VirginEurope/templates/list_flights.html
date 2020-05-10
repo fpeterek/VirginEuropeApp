@@ -13,7 +13,7 @@
 {% else %}
     <div>
         {% for i in flights %}
-            <p>{{ i }}</p>
+            <p>{{ i }} <a href="{% url 'book' %}?{{ i.to_url_params }}&pax=1">Book flight</a></p>
         {% endfor %}
     </div>
 {% endif %}

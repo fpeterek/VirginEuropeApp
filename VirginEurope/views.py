@@ -7,6 +7,31 @@ from VirginEurope import api, util
 from VirginEurope.forms import BookFlightForm, OriginBox, DestinationBox
 
 
+def book(request):
+    fl1 = request.GET.get('fl1', '').strip("'")
+    fl2 = request.GET.get('fl2', '').strip("'")
+    cls = request.GET.get('cls', '').strip("'")
+    pax = request.GET.get('pax', '').strip("'")
+
+    if not util.validate_class(cls):
+        return render(request, 'message.html', {'message': 'Invalid class'})
+
+    if not fl1 or not fl1.isdigit() or (fl2 and not fl2.isdigit()):
+        return render(request, 'message.html', {'message': 'Invalid flight number'})
+
+    if not pax or not pax.isdigit():
+        return render(request, 'message.html', {'message': 'Invalid passenger'})
+
+    resp = api.book_flights(fl1, fl2, pax, cls)
+    print(resp)
+    resp = json.loads(resp)
+
+    if resp.get('success'):
+        return render(request, 'message.html', {'message': 'Flight successfully booked. Thank you.'})
+
+    return render(request, 'message.html', {'message': 'An unexpected error has occured. Please try again later.'})
+
+
 def index(request):
     if request.method == 'GET':
         orig = OriginBox()

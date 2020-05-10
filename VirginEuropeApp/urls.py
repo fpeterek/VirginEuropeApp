@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('tickets/', views.tickets, name='tickets'),
-    path('airports/', views.airport_autocomplete, name='airports')
+    path('airports/', views.airport_autocomplete, name='airports'),
+    path('book/', views.book, name='book'),
 ]
