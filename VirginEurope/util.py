@@ -12,9 +12,7 @@ __classes = ['business', 'economy', 'first']
 
 def parse_airport(query: str) -> str:
     if not __airport_re.search(query):
-        print("Invalid airport", query)
         raise InvalidAirportException('Invalid airport')
-    print("Valid airport:", query[-5:-1])
     return query[-5:-1]
 
 
