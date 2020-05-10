@@ -35,7 +35,7 @@ def index(request):
         if form.errors or orig_form.errors or dest_form.errors:
             return render(request, 'page.html', {'orig': orig_form, 'dest': dest_form, 'form': form})
 
-        return HttpResponse(f'{{"origin":"{orig}", "destination":"{dest}", "date":"{date}", "class":"{tcls}"}}')
+        return HttpResponse(api.search_flights(orig, dest, date, tcls))
 
 
 def tickets(request):
