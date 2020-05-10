@@ -76,14 +76,14 @@ WSGI_APPLICATION = 'VirginEuropeApp.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'virgineurope': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pet0342',
-        'USER': 'fpeterek',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    },
+    # 'virgineurope': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'pet0342',
+    #     'USER': 'fpeterek',
+    #     'PASSWORD': '',
+    #     'HOST': '127.0.0.1',
+    #    'PORT': '5432',
+    # },
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
