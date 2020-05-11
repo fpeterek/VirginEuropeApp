@@ -18,12 +18,33 @@
 
 {% if not flights %}
     <h2>No flights found, sorry</h2>
-    <h4>Try again later or search for a different flight</h4>
+    <h3>Try again later or search for a different flight</h3>
 
 {% else %}
-    <div>
+    <div class="book-div">
         {% for i in flights %}
-            <p>{{ i }} <a href="{% url 'book' %}?{{ i.to_url_params }}&pax=1">Book flight</a></p>
+
+            {% if i.is_single_segment %}
+
+            <table class="book-flight-table">
+                <tr>
+                    <td class="book-flight-number">{{ i.pretty_flight }}</td>
+                    <td class="book-date">{{ i.pretty_departure }}</td>
+                </tr>
+                <tr>
+                    <td class="book-small">{{ i.pretty_class }}</td>
+                </tr>
+                <tr>
+                    <td class="book-price">${{ i.price }}</td>
+                    <td class="book-button"><a href="{% url 'book' %}?{{ i.to_url_params }}&pax=1">Book flight</a></td>
+                </tr>
+            </table>
+
+            {% else %}
+            {% endif %}
+
+            <div style="clear:both;"></div>
+
         {% endfor %}
     </div>
 {% endif %}
