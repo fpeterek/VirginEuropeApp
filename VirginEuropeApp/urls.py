@@ -23,4 +23,5 @@ urlpatterns = [
     path('tickets/', views.tickets, name='tickets'),
     path('airports/', views.airport_autocomplete, name='airports'),
     path('book/', views.book, name='book'),
+    path('refund/', views.refund_ticket, name='refund')
 ]

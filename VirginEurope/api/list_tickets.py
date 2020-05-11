@@ -35,6 +35,10 @@ class Ticket:
     def pretty_meal(self):
         return self.meal.capitalize()
 
+    @property
+    def is_old(self):
+        return datetime.datetime.now() > self.departure
+
 
 def list_tickets(pax: int, old: bool = False) -> list:
     params = {'pax': pax, 'all': old}
@@ -51,6 +55,6 @@ def list_tickets(pax: int, old: bool = False) -> list:
 
     tickets = obj.get('tickets')
     if tickets is not None:
-        return list(map(lambda x: Ticket(x), tickets))
+        return list(reversed(sorted(map(lambda x: Ticket(x), tickets), key=lambda ticket: ticket.departure)))
 
     return []

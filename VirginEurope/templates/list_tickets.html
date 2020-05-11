@@ -9,29 +9,42 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
+<a class="user" href="{% url 'tickets' %}?pax=1">Carson Mosley</a>
+
 
 <h1>Purchased Tickets</h1>
+
+{% if displaying_old %}
+    <a class="display-old" href="{% url 'tickets' %}?pax=1">New tickets only</a>
+{% else %}
+    <a class="display-old" href="{% url 'tickets' %}?pax=1&old=1">Display old tickets </a>
+{% endif %}
 
 {% for ticket in tickets %}
     <div>
         <p>
             <table class="ticket-table">
-            <tr>
-                <td class="flight-route">{{ ticket.origin }} - {{ ticket.destination }}</td>
-                <td class="flight-number">{{ ticket.pretty_flight }}</td>
-            </tr>
-            <tr>
-                <td>{{ ticket.pretty_departure }}</td>
-                <td class="small">Seat: {{ ticket.seat }}</td>
-            </tr>
-            <tr>
-                <td class="small">{{ ticket.pretty_class }}</td>
-                <td class="small">Meal: {{ ticket.pretty_meal }}</td>
-            </tr>
-            <tr>
-                <td>Aircraft: {{ ticket.equipment }}</td>
-            </tr>
+                <tr>
+                    <td class="flight-route">{{ ticket.origin }} - {{ ticket.destination }}</td>
+                    <td class="flight-number">{{ ticket.pretty_flight }}</td>
+                </tr>
+                <tr>
+                    <td>{{ ticket.pretty_departure }}</td>
+                    <td class="small">Seat: {{ ticket.seat }}</td>
+                </tr>
+                <tr>
+                    <td class="small">{{ ticket.pretty_class }}</td>
+                    <td class="small">Meal: {{ ticket.pretty_meal }}</td>
+                </tr>
+                <tr>
+                    <td>Aircraft: {{ ticket.equipment }}</td>
+                </tr>
             </table>
+
+            {% if not ticket.is_old %}
+                <a href="{% url 'refund' %}?id={{ ticket.id }}">Refund ticket</a>
+            {% endif %}
+
         </p>
     </div>
 {% endfor %}

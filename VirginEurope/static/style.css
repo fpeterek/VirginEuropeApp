@@ -27,3 +27,25 @@ h1 {
 .small {
     font-size: 80%;
 }
+
+.user {
+    font-size: 120%;
+    color: rgb(160, 32, 38);
+    text-decoration: underline;
+    float: right;
+    margin-right: 10px;
+}
+
+.display-old {
+    font-size: 120%;
+    border: solid rgb(160, 32, 38) 2px;
+    border-radius: 15px;
+    padding: 5px;
+    text-decoration: none;
+    color: floralwhite;
+    background-color: crimson;
+}
+
+.display-old:hover {
+    background-color: #950823;
+}

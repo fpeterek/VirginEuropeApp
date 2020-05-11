@@ -12,8 +12,17 @@
 			  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
 			  integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
 			  crossorigin="anonymous"></script>
+
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
+    <a class="user" href="{% url 'tickets' %}?pax=1">Carson Mosley</a>
+
+    <h1>Book a flight</h1>
+
     <form action="/" method="post">
         {% csrf_token %}
         <div class="ui-widget">

@@ -1,10 +1,11 @@
 import json
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from VirginEurope.api.book_flights import book_flights
 from VirginEurope.api.list_tickets import list_tickets
+from VirginEurope.api.refund_ticket import refund
 from VirginEurope.api.search_airports import search_airports
 from VirginEurope.api.search_flights import search_flights
 
@@ -79,12 +80,14 @@ def tickets(request):
     if not pax.isdigit():
         return render(request, 'message.html', {'message': 'Invalid passenger'})
 
+    display_old = old in _true
+
     try:
-        flight_tickets = list_tickets(pax, old in _true)
+        flight_tickets = list_tickets(pax, display_old)
     except Exception as e:
         return render(request, 'message.html', {'message': 'Unexpected error'})
 
-    return render(request, 'list_tickets.html', {'tickets': flight_tickets})
+    return render(request, 'list_tickets.html', {'tickets': flight_tickets, 'displaying_old': display_old})
 
 
 def airport_autocomplete(request):
@@ -95,3 +98,22 @@ def airport_autocomplete(request):
         results = search_airports('')
 
     return HttpResponse(results, 'application/json')
+
+
+def refund_ticket(request):
+
+    ticket = request.GET.get('id', '').strip("'")
+
+    if not ticket.isdigit():
+        return render(request, 'message.html', {'message': 'Invalid ticket ID'})
+
+    res = refund(int(ticket))
+
+    if res.get('success') is not None:
+        return redirect('/tickets?pax=1')
+
+    if res.get('error'):
+        return render(request, 'message.html', {'message': res['error']})
+
+    return render(request, 'message.html', {'message': 'Ticket could not be refunded. Try again later.'})
+

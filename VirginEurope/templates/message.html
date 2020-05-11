@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Virgin Europe</title>
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
+    <a class="user" href="{% url 'tickets' %}?pax=1">Carson Mosley</a>
+
     <p>
         {{ message }}
     </p>
