@@ -1,0 +1,29 @@
+body {
+    font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+}
+
+h1 {
+    font-size: 300%;
+}
+
+.ticket-table {
+    padding-left: 4px;
+    padding-right: 4px;
+    border: solid black 2px;
+    background-color: rgb(211, 48, 56);
+    color: floralwhite;
+    min-width: 300px;
+}
+
+.flight-number {
+    text-align: right;
+    font-size: 130%;
+}
+
+.flight-route {
+    font-size: 150%;
+}
+
+.small {
+    font-size: 80%;
+}

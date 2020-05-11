@@ -2,18 +2,7 @@ import json
 
 import requests
 
-url = 'http://127.0.0.1:8080'
-
-
-def search_airports(query: str) -> str:
-    params = {'q': query}
-    resp = requests.get(f'{url}/airports', params=params)
-
-    if resp.status_code != 200:
-        resp.close()
-        return ''
-
-    return resp.text
+from VirginEurope.api.conf import Conf
 
 
 def _flight_to_url_params(first: int = None, second: int = None, cls: str = None) -> str:
@@ -86,23 +75,9 @@ def parse_flights(resp: str, cls: str) -> list:
 
 def search_flights(orig: str, dest: str, date: str, cls: str) -> list:
     data = {'orig': orig, 'dest': dest, 'date': date, 'cls': cls}
-    resp = requests.post(f'{url}/find-flights', json=data)
+    resp = requests.post(f'{Conf.url}/find-flights', json=data)
 
     if resp.status_code != 200:
         return []
 
     return parse_flights(resp.text, cls)
-
-
-def book_flights(fl1: int, fl2: int, pax: int, cls: str) -> str:
-    params = {'fl1': fl1, 'pax': pax, 'cls': cls}
-
-    if fl2 is not None:
-        params['fl2'] = fl2
-
-    resp = requests.get(f'{url}/book-flights', params=params)
-
-    if resp.status_code != 200:
-        return '{"error": "Server unavailable"}'
-
-    return resp.text

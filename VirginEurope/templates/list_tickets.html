@@ -3,11 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>My Tickets</title>
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
 
+<h1>Purchased Tickets</h1>
+
 {% for ticket in tickets %}
-    <p>{{ ticket }}</p>
+    <div>
+        <p>
+            <table class="ticket-table">
+            <tr>
+                <td class="flight-route">{{ ticket.origin }} - {{ ticket.destination }}</td>
+                <td class="flight-number">{{ ticket.pretty_flight }}</td>
+            </tr>
+            <tr>
+                <td>{{ ticket.pretty_departure }}</td>
+                <td class="small">Seat: {{ ticket.seat }}</td>
+            </tr>
+            <tr>
+                <td class="small">{{ ticket.pretty_class }}</td>
+                <td class="small">Meal: {{ ticket.pretty_meal }}</td>
+            </tr>
+            <tr>
+                <td>Aircraft: {{ ticket.equipment }}</td>
+            </tr>
+            </table>
+        </p>
+    </div>
 {% endfor %}
 </body>
 </html>
