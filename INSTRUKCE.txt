@@ -11,6 +11,21 @@ frameworku Ktor. Ke správné funkčnosti je třeba spustit obě aplikace.
 
 ---------------------------------------
 
+V aplikaci je spousta letišť přidaných především za účelem testování našeptávače (stačí
+začít psát a aplikace začne našeptávat podle názvu letiště a IATA/ICAO kódů).
+
+Za účelem testování jsem do databáze přidal lety mezi destinacemi
+
+Kobeřice - Dubai a zpět
+Kobeřice - New York a zpět
+Kobeřice - Singapore a zpět
+Kobeřice - Los Angeles a zpět
+
+Lety jsou vytvořeny na druhou polovinu srpna 2020 (není třeba hledat lety na srpen,
+stačí zahledat s aktuálním datem, aplikace najde nejbližší lety).
+
+---------------------------------------
+
 Aplikace umožňuje nákup, výpis a refundaci letenek. Při nákupu se našeptávají letiště.
 Vstup je ošetřený. 
 
