@@ -41,6 +41,25 @@
             </table>
 
             {% else %}
+
+                <table class="book-flight-table">
+                <tr>
+                    <td class="book-flight-number">{{ i.pretty_first_flight }}</td>
+                    <td class="book-date">{{ i.pretty_departure }}</td>
+                </tr>
+                <tr>
+                    <td class="book-flight-number">{{ i.pretty_second_flight }}</td>
+                    <td class="book-date">{{ i.pretty_second_departure }}</td>
+                </tr>
+                <tr>
+                    <td class="book-small">{{ i.pretty_class }}</td>
+                </tr>
+                <tr>
+                    <td class="book-price">${{ i.price }}</td>
+                    <td class="book-button"><a href="{% url 'book' %}?{{ i.to_url_params }}&pax=1">Book flights</a></td>
+                </tr>
+            </table>
+
             {% endif %}
 
             <div style="clear:both;"></div>
