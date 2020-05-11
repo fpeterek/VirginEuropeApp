@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from django.http import HttpResponse
@@ -63,6 +64,12 @@ def index(request):
 
         date = request.POST.get('date')
         tcls = request.POST.get('cls')
+
+        parsed_date = datetime.datetime.strptime(date, "%m/%d/%Y").date()
+        now = datetime.datetime.now().date()
+
+        if parsed_date < now:
+            form.add_error('date', "Date cannot be before today's date")
 
         if form.errors or orig_form.errors or dest_form.errors:
             return render(request, 'page.html', {'orig': orig_form, 'dest': dest_form, 'form': form})
