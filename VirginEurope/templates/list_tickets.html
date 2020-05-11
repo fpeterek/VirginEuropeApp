@@ -20,9 +20,9 @@
     <a class="display-old" href="{% url 'tickets' %}?pax=1&old=1">Display old tickets </a>
 {% endif %}
 
-{% for ticket in tickets %}
-    <div>
-        <p>
+<div class="ticket-div">
+    {% for ticket in tickets %}
+        <p class="ticket-par">
             <table class="ticket-table">
                 <tr>
                     <td class="flight-route">{{ ticket.origin }} - {{ ticket.destination }}</td>
@@ -42,11 +42,11 @@
             </table>
 
             {% if not ticket.is_old %}
-                <a href="{% url 'refund' %}?id={{ ticket.id }}">Refund ticket</a>
+                <a class="ticket-button" href="{% url 'refund' %}?id={{ ticket.id }}">Refund ticket</a>
             {% endif %}
-
         </p>
-    </div>
-{% endfor %}
+        <div style="clear:both;"></div>
+    {% endfor %}
+</div>
 </body>
 </html>
