@@ -7,6 +7,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 
     <script
 			  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
@@ -19,11 +21,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
+
+    <div class="page-header"><h1 class="virgin-home"><a href="{% url 'index' %}">Virgin Europe</a></h1></div>
+
     <a class="user" href="{% url 'tickets' %}?pax=1">Carson Mosley</a>
 
     <h1>Book a flight</h1>
 
-    <form action="/" method="post">
+    <form action="/" method="post" class="book-form">
         {% csrf_token %}
         <div class="ui-widget">
         {{ orig }}
@@ -32,8 +37,8 @@
         {{ dest }}
         </div>
         {{ form }}
-
-        <input type="submit" value="Submit">
+        <div style="clear:both;"></div>
+        <input class="search-button" type="submit" value="Search">
     </form>
 
 <script>
@@ -46,11 +51,11 @@
   $(function() {
     $( "#origin_box" ).autocomplete({
       source: "/airports/",
-      minLength: 2,
+      minLength: 0,
     });
     $( "#destination_box" ).autocomplete({
       source: "/airports/",
-      minLength: 2,
+      minLength: 0,
     });
   } );
 </script>
