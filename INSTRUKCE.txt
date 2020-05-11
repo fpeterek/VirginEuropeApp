@@ -71,4 +71,19 @@ REST API běží na portu 8080 -> http://127.0.0.1:8080
 
 Nestihl jsem vše, co jsem chtěl, další funkce případně dodělám do příštího termínu.
 
+Pokud se budete chtít podívat na zdrojáky, relevantní zdrojáky jsou zde:
+
+
+REST API
+
+VirginEurope/src/main/kotlin/org/fpeterek/virgineurope/api
+
+
+Webová appka
+VirginEuropeApp/VirginEurope/api
+VirginEuropeApp/VirginEurope/views.py
+VirginEuropeApp/VirginEurope/forms.py
+VirginEuropeApp/VirginEurope/util.py
+VirginEuropeApp/VirginEurope/{templates|static} pro html/css
+VirginEuropeApp/VirginEuropeApp/urls.py
 
