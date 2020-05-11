@@ -1,0 +1,74 @@
+Virgin Europe
+
+PET0342
+
+---------------------------------------
+
+Aplikace je rozdělená do dvou částí. Frontend je implementovaný v Pythonu ve frameworku Django.
+Frontend komunikuje s backendem pomocí REST API přes HTTP. Backend je implementovaný v Kotlinu
+a využívá ORM napsané v Javě z předchozí části projektu. REST API je implementované pomocí
+frameworku Ktor. Ke správné funkčnosti je třeba spustit obě aplikace.
+
+---------------------------------------
+
+Aplikace umožňuje nákup, výpis a refundaci letenek. Při nákupu se našeptávají letiště.
+Vstup je ošetřený. 
+
+
+Nedostatky aplikace:
+
+1. Chybí autorizace - všude je natrvdo pasažér s ID 1, autorizaci jsem v tomhle termínu nestihl
+
+2. Nelze změnit jídlo nebo upgradovat letenku - taky jsem nestihl
+
+3. Nelze vybrat sedadlo - potřeboval bych mapu letadel a hromadu Javascriptu, abych mohl
+                          vytvořit takovou tu pěknou klikačku s výběrem sedadla -
+                          nestihnu do konce semestru, bohužel
+
+--------------------------------------
+
+Spuštění aplikace:
+
+
+Spuštění backendu je jednoduché, lze využít Gradle Wrapper, jediná závislost je JDK13
+
+cd VirginEurope
+
+./gradlew build run
+
+
+Spuštění frontendu je složitější.
+
+Je potřeba mít nainstalován Python 3.6 nebo vyšší (testováno na 3.6.9 i 3.8.0)
+Je potřeba vytvořit virtuální prostředí, aktivovat jej a doinstalovat závislosti
+
+
+cd VirginEuropeApp
+
+virtualenv venv --python=python3.8  # <- záleží na nainstalované verzi
+
+source venv/bin/activate  # Na windows env\Scripts\activate 
+
+pip install -r requirements.txt
+
+
+Poté stačí pustit server
+
+./manage.py runserver
+
+případně
+
+python manage.py runserver
+
+
+-----------------------------
+
+Webová aplikace běží na portu 8000 -> http://127.0.0.1:8000
+
+REST API běží na portu 8080 -> http://127.0.0.1:8080
+
+-----------------------------
+
+Nestihl jsem vše, co jsem chtěl, další funkce případně dodělám do příštího termínu.
+
+
